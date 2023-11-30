@@ -1,13 +1,14 @@
+import { baseURL } from "../constants/baseURL"
 
 
 const NavBar = () => {
     return (
         <>
-            <nav class="bg-white border-gray-200 dark:bg-gray-900 my-3">
-                <div class="w-full flex justify-center py-2">
-                    <div class="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img src="pdf.png" class="h-10" alt="PDF EDITER Logo" />
-                        <span class="self-center  text-4xl font-bold whitespace-nowrap dark:text-white">PDF EDITOR</span>
+            <nav className="bg-white sticky top-0 z-50 border-gray-200 dark:bg-gray-900 py-3">
+                <div className="w-full flex justify-center py-2">
+                    <div className="flex items-center space-x-3 rtl:space-x-reverse">
+                        <img src={`${baseURL}/pdf.png`} className="h-10" alt="PDF EDITER Logo" />
+                        <span className="self-center  text-4xl font-bold whitespace-nowrap dark:text-white">PDF EDITOR</span>
                     </div>
                 </div>
             </nav>

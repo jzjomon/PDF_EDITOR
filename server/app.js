@@ -2,14 +2,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const cors = require('cors');
 require('dotenv').config();
-const dbConnect = require("./config/dbConfig");
 
 var app = express(); 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/routes');
 const PORT = process.env.PORT || 4000 ;
-dbConnect()
+// dbConnect()
 
+app.use(cors());
 app.use(logger('dev')); 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
