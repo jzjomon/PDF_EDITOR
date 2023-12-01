@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import NavBar from '../components/Navbar'
 import { baseURL } from '../constants/baseURL'
 import { useParams } from 'react-router-dom'
 import PdfView from '../components/PdfView'
-import { instance } from '../config/axios'
 
 
 const View = () => {

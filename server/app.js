@@ -7,8 +7,7 @@ require('dotenv').config();
 
 var app = express(); 
 var indexRouter = require('./routes/routes');
-const PORT = process.env.PORT || 4000 ;
-// dbConnect()
+const PORT = 8000 ;
 
 app.use(cors());
 app.use(logger('dev')); 
