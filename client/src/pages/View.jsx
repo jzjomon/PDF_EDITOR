@@ -16,7 +16,6 @@ const View = () => {
                 <NavBar />
             </div>
             <PdfView pdfurl={pdfurl} />
-
         </>
     )
 }

@@ -13,7 +13,9 @@ const FileUpload = () => {
             const dataForm = new FormData();
             dataForm.append('pdf', file);
             instance.post('/upload', dataForm).then(res => {
-                navigate(`/view/${res.data.name}`)
+                swall.fire("The document will deleted after 10 minutes .", "", "warning").then(() => {
+                    navigate(`/view/${res.data.name}`)
+                })
             }).catch(err => {
                 swall.fire("Something went wrong !", "", "error")
             })
@@ -32,7 +34,7 @@ const FileUpload = () => {
                         <div className='mb-6'>
                             <div className='flex justify-center'>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-[100px]">
-                                    <path  strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                                 </svg>
                             </div>
                             <h1 className='text-xl font-semibold text-center text-gray-700 mt-3'>
@@ -45,7 +47,7 @@ const FileUpload = () => {
                         <div className='text-center'>
                             <button className='inline-flex gap-3 rounded bg-red-600  text-white text-xl py-4 px-2'>
                                 <svg className="w-6 h-6 text-white -rotate-90 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
-                                    <path stroke="currentColor"  strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3" />
+                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 8h11m0 0-4-4m4 4-4 4m-5 3H3a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h3" />
                                 </svg>
                                 <span>Click to upload your file</span>
                             </button>

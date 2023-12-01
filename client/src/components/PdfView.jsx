@@ -3,6 +3,8 @@ import { Document, Page } from "react-pdf"
 import { pdfjs } from 'react-pdf';
 import { PDFDocument } from 'pdf-lib'
 import { saveAs } from 'file-saver'
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
     'pdfjs-dist/build/pdf.worker.min.js',
@@ -15,6 +17,7 @@ const PdfView = ({ pdfurl }) => {
     const [pages, setPages] = useState();
     const [pagesArr, setPageArr] = useState([]);
     const [selected, setSelected] = useState([]);
+    const navigate = useNavigate();
 
     const mergePDFPages = async (pdfUrl, pageNumbers) => {
         const existingPdfBytes = await fetch(pdfUrl).then((res) => res.arrayBuffer());
@@ -53,7 +56,11 @@ const PdfView = ({ pdfurl }) => {
     const handleDownload = async () => {
       await mergePDFPages(pdfurl, selected);
     }
-
+    const handleError = () => {
+        Swal.fire("Something went wrong !","Document has been deleted from the server .","error").then(() => {
+            navigate('/');
+        })
+    }
 
     return (
         <>
@@ -85,7 +92,7 @@ const PdfView = ({ pdfurl }) => {
                             
                                 <div key={ele} className='flex'>
                                     <div  className='flex w-4/5 justify-center border mb-3' onClick={() => setPage(ele)}>
-                                        <Document file={pdfurl} onLoadSuccess={handleLoad} >
+                                        <Document  className='' file={pdfurl} onLoadSuccess={handleLoad} >
                                             <Page pageNumber={ele} renderTextLayer={false} scale={0.2} renderAnnotationLayer={false} />
                                         </Document>
                                     </div>
@@ -97,9 +104,9 @@ const PdfView = ({ pdfurl }) => {
                         ))
                     }
                 </div>
-                <div className='w-4/5 flex justify-center overflow-auto'>
-                    <Document file={pdfurl} onLoadSuccess={handleLoad} >
-                        <Page pageNumber={page} renderTextLayer={false} scale={1.3} renderAnnotationLayer={false} />
+                <div className='w-4/5 flex justify-center overflow-auto '>
+                    <Document error={handleError} file={pdfurl} onLoadSuccess={handleLoad} >
+                        <Page  pageNumber={page} renderTextLayer={false} scale={1.3} renderAnnotationLayer={false} />
                     </Document>
 
                 </div>
